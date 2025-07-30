@@ -69,7 +69,7 @@ from einops import rearrange
 import os
 import sys
 sys.path.append(os.getcwd())
-import HYPIR.utils.tiled_vae.devices as devices
+from . import devices
 
 try:
     import xformers
