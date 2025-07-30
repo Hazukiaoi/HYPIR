@@ -3,7 +3,7 @@ from diffusers import DDPMScheduler, UNet2DConditionModel
 from transformers import CLIPTextModel, CLIPTokenizer
 from peft import LoraConfig
 
-from HYPIR.enhancer.base import BaseEnhancer
+from .base import BaseEnhancer
 
 
 class SD2Enhancer(BaseEnhancer):

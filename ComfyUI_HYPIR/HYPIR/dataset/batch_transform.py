@@ -6,9 +6,9 @@ import torch
 from torch.nn import functional as F
 import numpy as np
 
-from HYPIR.dataset.utils import USMSharp, filter2D
-from HYPIR.dataset.diffjpeg import DiffJPEG
-from HYPIR.utils.degradation import random_add_gaussian_noise_pt, random_add_poisson_noise_pt
+from .utils import USMSharp, filter2D
+from .diffjpeg import DiffJPEG
+from ..utils.degradation import random_add_gaussian_noise_pt, random_add_poisson_noise_pt
 
 
 class BatchTransform:

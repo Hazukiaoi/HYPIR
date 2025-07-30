@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from HYPIR.utils.tiled_vae.vaehook import VAEHook
+from .vaehook import VAEHook
 
 
 @contextmanager

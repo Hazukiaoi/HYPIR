@@ -21,10 +21,10 @@ import diffusers
 from diffusers import AutoencoderKL
 from PIL import Image
 
-from HYPIR.model.D import ImageConvNextDiscriminator
-from HYPIR.utils.common import instantiate_from_config, log_txt_as_img, print_vram_state, SuppressLogging
-from HYPIR.utils.ema import EMAModel
-from HYPIR.utils.tabulate import tabulate
+from ..model.D import ImageConvNextDiscriminator
+from ..utils.common import instantiate_from_config, log_txt_as_img, print_vram_state, SuppressLogging
+from ..utils.ema import EMAModel
+from ..utils.tabulate import tabulate
 
 
 logger = get_logger(__name__, log_level="INFO")

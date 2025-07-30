@@ -10,9 +10,9 @@ import torch
 from torch.utils import data
 from PIL import Image
 
-from HYPIR.dataset.utils import augment, random_crop_arr, center_crop_arr, load_file_meta
-from HYPIR.utils.degradation import circular_lowpass_kernel, random_mixed_kernels
-from HYPIR.utils.common import instantiate_from_config
+from .utils import augment, random_crop_arr, center_crop_arr, load_file_meta
+from ..utils.degradation import circular_lowpass_kernel, random_mixed_kernels
+from ..utils.common import instantiate_from_config
 
 
 class RealESRGANDataset(data.Dataset):

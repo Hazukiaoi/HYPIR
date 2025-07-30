@@ -3,7 +3,7 @@ from torch import nn
 from vision_aided_loss.cv_discriminator import BlurPool, spectral_norm
 from vision_aided_loss.cv_losses import multilevel_loss
 
-from HYPIR.model.backbone import ImageOpenCLIPConvNext
+from .backbone import ImageOpenCLIPConvNext
 
 
 class MultiLevelDConv(nn.Module):

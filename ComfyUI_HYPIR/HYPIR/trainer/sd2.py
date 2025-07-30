@@ -6,7 +6,7 @@ from peft import LoraConfig
 from diffusers import DDPMScheduler, UNet2DConditionModel
 from transformers import CLIPTextModel, CLIPTokenizer
 
-from HYPIR.trainer.base import BaseTrainer
+from .base import BaseTrainer
 
 
 logger = get_logger(__name__, log_level="INFO")
