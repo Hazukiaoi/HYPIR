@@ -28,6 +28,7 @@ class HYPIRModelLoader:
             "ff.net.0.proj",
         ]
 
+        # Always load to CPU first
         model = SD2Enhancer(
             base_model_path=base_model_path,
             weight_path=hypir_model_path,
@@ -35,9 +36,12 @@ class HYPIRModelLoader:
             lora_rank=lora_rank,
             model_t=model_t,
             coeff_t=coeff_t,
-            device=device,
+            device="cpu",
         )
         model.init_models()
+
+        # Store the target device for sampling
+        model.target_device = device
 
         return (model,)
 
@@ -51,6 +55,7 @@ class HYPIRUpscaler:
                 "prompt": ("STRING", {"multiline": True, "default": "a high-quality photo"}),
                 "upscale": ("FLOAT", {"default": 1.0, "min": 1.0, "max": 8.0, "step": 0.1}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 4294967295}),
+                "unload_to_cpu": ("BOOLEAN", {"default": True}),
             }
         }
 
@@ -58,10 +63,18 @@ class HYPIRUpscaler:
     FUNCTION = "upscale"
     CATEGORY = "HYPIR"
 
-    def upscale(self, hypir_model, image, prompt, upscale, seed):
+    def upscale(self, hypir_model, image, prompt, upscale, seed, unload_to_cpu):
         if seed == -1:
             seed = random.randint(0, 2**32 - 1)
         set_seed(seed)
+
+        target_device = hypir_model.target_device
+
+        # Move models to target device
+        hypir_model.G.to(target_device)
+        hypir_model.text_encoder.to(target_device)
+        hypir_model.vae.to(target_device)
+        hypir_model.device = target_device
 
         # from comfy format (B, H, W, C) to model format (B, C, H, W)
         image = image.permute(0, 3, 1, 2)
@@ -75,6 +88,12 @@ class HYPIRUpscaler:
 
         # from model format (B, C, H, W) to comfy format (B, H, W, C)
         enhanced_image = enhanced_image.permute(0, 2, 3, 1)
+
+        if unload_to_cpu:
+            hypir_model.G.to("cpu")
+            hypir_model.text_encoder.to("cpu")
+            hypir_model.vae.to("cpu")
+            hypir_model.device = "cpu"
 
         return (enhanced_image,)
 
