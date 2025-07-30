@@ -50,7 +50,7 @@ class HYPIRUpscaler:
                 "image": ("IMAGE",),
                 "prompt": ("STRING", {"multiline": True, "default": "a high-quality photo"}),
                 "upscale": ("FLOAT", {"default": 1.0, "min": 1.0, "max": 8.0, "step": 0.1}),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 4294967295}),
             }
         }
 
