@@ -1,0 +1,9 @@
+torch
+torchvision
+diffusers
+transformers
+peft
+accelerate
+omegaconf
+einops
+opencv-python-headless
